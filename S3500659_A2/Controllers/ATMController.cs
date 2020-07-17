@@ -58,5 +58,64 @@ namespace S3500659_A2.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Withdraw(int id)
+        {
+            var account = await _context.Accounts.FindAsync(id);
+            return View(account);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Withdraw(int id, decimal amount, string comment)
+        {
+            var account = await _context.Accounts.FindAsync(id);
+
+            if (amount <= 0)
+                ModelState.AddModelError(nameof(amount), "Amount must be positive.");
+            if (amount.HasMoreThanTwoDecimalPlaces())
+                ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Amount = amount;
+                return View(account);
+            }
+
+            if (account.TransactionCounter < account.MaxFreeTransaction)
+            {
+                if (account.Balance < amount)
+                {
+                    ModelState.AddModelError(nameof(amount), "You don't have enough money to make this withdraw");
+
+                    if (!ModelState.IsValid)
+                    {
+                        ViewBag.Amount = amount;
+                        return View(account);
+                    }
+                }
+                account.Withdraw(amount, comment);
+            }
+            else
+            {
+                if (account.Balance < (amount + ServiceCharge.WithdrawFee))
+                {
+                    ModelState.AddModelError(nameof(amount), $"Your balance is less than requested withdraw amount + withdraw fee {ServiceCharge.WithdrawFee}");
+
+                        ViewBag.Amount = amount;
+                        return View(account);
+
+                }
+                else
+                {
+                    account.Withdraw(amount, comment, ServiceCharge.WithdrawFee);
+                }
+            }
+
+            
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

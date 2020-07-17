@@ -11,6 +11,12 @@ namespace S3500659_A2.Models
         Checking = 2
     }
 
+    public static class ServiceCharge
+    {
+        public static decimal WithdrawFee { get; set; } = 0.10M;
+        public static decimal TransferFee { get; set; } = 0.20M;
+    }
+
     public class Account
     {
 
@@ -34,6 +40,14 @@ namespace S3500659_A2.Models
         [Required, DataType(DataType.Currency)]
         [Column(TypeName = "money")]
         public decimal Balance { get; set; }
+        public int TransactionCounter { get; set; }
+        public int MaxFreeTransaction { get; set; }
+
+        public Account()
+        {
+            TransactionCounter = 0;
+            MaxFreeTransaction = 4;
+        }
 
         public void Deposit(decimal amount, string comment)
         {
@@ -45,8 +59,49 @@ namespace S3500659_A2.Models
                     Amount = amount,
                     ModifyDate = DateTime.UtcNow,
                     Comment = comment
-                    
+
                 });
+        }
+
+        public void Withdraw(decimal amount, string comment)
+        {
+            Balance -= amount;
+            Transactions.Add(
+                new Transaction
+                {
+                    TransactionType = TransactionType.Withdraw,
+                    Amount = amount,
+                    ModifyDate = DateTime.UtcNow,
+                    Comment = comment
+
+                });
+            TransactionCounter++;
+        }
+
+        public void Withdraw(decimal amount, string comment, decimal fee)
+        {
+            Balance -= (amount + fee);
+            Transactions.Add(
+                new Transaction
+                {
+                    TransactionType = TransactionType.Withdraw,
+                    Amount = amount,
+                    ModifyDate = DateTime.UtcNow,
+                    Comment = comment
+
+                });
+
+            Transactions.Add(
+                new Transaction
+                {
+                    TransactionType = TransactionType.ServiceCharge,
+                    Amount = fee,
+                    ModifyDate = DateTime.UtcNow,
+                    Comment = "Withdraw Fee"
+
+                });
+
+            TransactionCounter++;
         }
     }
 }

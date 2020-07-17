@@ -68,7 +68,9 @@ namespace S3500659_A2.Data
                     AccountType = AccountType.Saving,
                     CustomerID = 2100,
                     Balance = 100,
-                    ModifyDate = DateTime.UtcNow
+                    ModifyDate = DateTime.UtcNow,
+                    MaxFreeTransaction = 4
+
                 },
                 new Account
                 {
@@ -76,7 +78,8 @@ namespace S3500659_A2.Data
                     AccountType = AccountType.Checking,
                     CustomerID = 2100,
                     Balance = 500,
-                    ModifyDate = DateTime.UtcNow
+                    ModifyDate = DateTime.UtcNow,
+                    MaxFreeTransaction = 4
                 },
                 new Account
                 {
@@ -84,7 +87,8 @@ namespace S3500659_A2.Data
                     AccountType = AccountType.Saving,
                     CustomerID = 2200,
                     Balance = 500.95m,
-                    ModifyDate = DateTime.UtcNow
+                    ModifyDate = DateTime.UtcNow,
+                    MaxFreeTransaction = 4
                 });
 
             context.Transactions.AddRange(

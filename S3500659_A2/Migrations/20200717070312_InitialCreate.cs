@@ -51,7 +51,9 @@ namespace S3500659_A2.Migrations
                     AccountType = table.Column<int>(nullable: false),
                     CustomerID = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false),
-                    Balance = table.Column<decimal>(type: "money", nullable: false)
+                    Balance = table.Column<decimal>(type: "money", nullable: false),
+                    TransactionCounter = table.Column<int>(nullable: false),
+                    MaxFreeTransaction = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

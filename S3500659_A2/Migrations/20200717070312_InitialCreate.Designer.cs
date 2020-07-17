@@ -10,7 +10,7 @@ using S3500659_A2.Data;
 namespace S3500659_A2.Migrations
 {
     [DbContext(typeof(A2Context))]
-    [Migration("20200716053542_InitialCreate")]
+    [Migration("20200717070312_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,8 +35,14 @@ namespace S3500659_A2.Migrations
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
+                    b.Property<int>("MaxFreeTransaction")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("TransactionCounter")
+                        .HasColumnType("int");
 
                     b.HasKey("AccountNumber");
 
