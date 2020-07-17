@@ -38,7 +38,7 @@ namespace S3500659_A2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Deposit(int id, decimal amount)
+        public async Task<IActionResult> Deposit(int id, decimal amount, string comment)
         {
             var account = await _context.Accounts.FindAsync(id);
 
@@ -52,7 +52,7 @@ namespace S3500659_A2.Controllers
                 return View(account);
             }
 
-            account.Deposit(amount);
+            account.Deposit(amount, comment);
 
             await _context.SaveChangesAsync();
 
