@@ -35,7 +35,7 @@ namespace S3500659_A2.Models
         [Column(TypeName = "money")]
         public decimal Balance { get; set; }
 
-        public void Deposit(decimal amount)
+        public void Deposit(decimal amount, string comment)
         {
             Balance += amount;
             Transactions.Add(
@@ -43,7 +43,9 @@ namespace S3500659_A2.Models
                 {
                     TransactionType = TransactionType.Deposit,
                     Amount = amount,
-                    ModifyDate = DateTime.UtcNow
+                    ModifyDate = DateTime.UtcNow,
+                    Comment = comment
+                    
                     
                 });
         }
