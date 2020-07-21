@@ -8,6 +8,7 @@ using NwbaExample.Utilities;
 using S3500659_A2.Data;
 using S3500659_A2.Filters;
 using S3500659_A2.Models;
+using S3500659_A2.ViewModel;
 
 namespace S3500659_A2.Controllers
 {
@@ -29,6 +30,7 @@ namespace S3500659_A2.Controllers
 
             return View(customer);
         }
+
 
         //public async Task<IActionResult> Deposit(int id) => View(await _context.Accounts.FindAsync(id));
         public async Task<IActionResult> Deposit(int id)
@@ -100,10 +102,12 @@ namespace S3500659_A2.Controllers
                 if (account.Balance < (amount + ServiceCharge.WithdrawFee))
                 {
                     ModelState.AddModelError(nameof(amount), $"Your balance is less than requested withdraw amount + withdraw fee {ServiceCharge.WithdrawFee}");
-
+                    
+                    if (!ModelState.IsValid)
+                    {
                         ViewBag.Amount = amount;
                         return View(account);
-
+                    }
                 }
                 else
                 {
@@ -117,5 +121,33 @@ namespace S3500659_A2.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+
+        public async Task<IActionResult> Transfer(int id)
+        {
+            //var customer = await _context.Customers.FindAsync(CustomerID);
+            //ViewBag.SourceAccount = id;
+            
+
+
+
+            var model = new TransferViewModel
+            {
+                Customer = await _context.Customers.FindAsync(CustomerID),
+                Source = await _context.Accounts.FindAsync(id)
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Transfer(TransferViewModel viewModel)
+        {
+            Console.WriteLine(viewModel.Destination.AccountNumber);
+
+            return View(viewModel);
+        }
+
+
     }
 }

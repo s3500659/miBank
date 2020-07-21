@@ -171,3 +171,4 @@ C:\Users\Vinh\Desktop\WDT A2\S3500659_A2\obj\Debug\netcoreapp3.1\S3500659_A2.csp
 C:\Users\Vinh\Desktop\WDT A2\S3500659_A2\obj\Debug\netcoreapp3.1\S3500659_A2.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Vinh\Desktop\WDT A2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\ATM\Deposit.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\ATM\Withdraw.cshtml.g.cs
+C:\Users\Vinh\Desktop\WDT A2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\ATM\Transfer.cshtml.g.cs

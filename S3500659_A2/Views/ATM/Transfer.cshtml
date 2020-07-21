@@ -1,0 +1,47 @@
+﻿@model S3500659_A2.ViewModel.TransferViewModel
+
+@{
+    ViewBag.Title = "Transfer";
+}
+
+<div>
+    <h3>Transfer from: @Model.Source.AccountNumber (@Model.Source.AccountType) - Balance: $@Model.Source.Balance.ToString("0.00") </h3>
+</div>
+
+<form asp-action="Transfer">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Destination"></label>
+        <select asp-for="Destination">
+            <option value="">Select a destination account</option>
+            @foreach (var acc in @Model.Customer.Accounts)
+            {
+                if (acc != @Model.Source)
+                {
+                    <option value="@Model.Destination">@acc.AccountNumber (@acc.AccountType) - Balance: $@acc.Balance.ToString("0.00")</option>
+                }
+            }
+        </select>
+
+        <div class="form-group">
+            <label for="Amount" class="control-label">Transfer Amount</label>
+            <input id="Amount" name="Amount" class="form-control" value="@ViewBag.Amount?.ToString("0.00")"
+                   data-val="true" data-val-number="The field Amount must be a number."
+                   data-val-required="The Amount field is required." />
+            @Html.ValidationMessage("Amount", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Comment" class="control-label"></label>
+            <input asp-for="Comment" class="form-control" />
+            <span asp-validation-for="Comment" class="text-danger"></span>
+
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+
+
+    </div>
+</form>
