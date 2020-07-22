@@ -103,5 +103,33 @@ namespace S3500659_A2.Models
 
             TransactionCounter++;
         }
+
+        public void Transfer(Account destination, decimal amount, string comment, decimal fee = 0)
+        {
+            Balance -= (amount + fee);
+            TransactionCounter++;
+
+            destination.Balance += amount;
+
+            Transactions.Add(
+                new Transaction
+                {
+                    TransactionType = TransactionType.Transfer,
+                    Amount = -amount,
+                    DestinationAccountNumber = destination.AccountNumber,
+                    ModifyDate = DateTime.UtcNow,
+                    Comment = comment
+                });
+
+            destination.Transactions.Add(
+                new Transaction
+                {
+                    TransactionType = TransactionType.Transfer,
+                    Amount = amount,
+                    ModifyDate = DateTime.UtcNow,
+                    Comment = comment
+                });
+
+        }
     }
 }

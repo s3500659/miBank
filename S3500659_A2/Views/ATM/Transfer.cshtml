@@ -12,15 +12,8 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="Destination"></label>
-        <select asp-for="Destination">
-            <option value="">Select a destination account</option>
-            @foreach (var acc in @Model.Customer.Accounts)
-            {
-                if (acc != @Model.Source)
-                {
-                    <option value="@Model.Destination">@acc.AccountNumber (@acc.AccountType) - Balance: $@acc.Balance.ToString("0.00")</option>
-                }
-            }
+        <select asp-for="Destination" asp-items="@Model.Accounts">
+            <option value="">Select a destination account</option>      
         </select>
 
         <div class="form-group">

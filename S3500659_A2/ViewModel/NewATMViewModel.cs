@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace S3500659_A2.ViewModel
 {
-    public class TransferViewModel
+    public class NewATMViewModel
     {
-        public Customer Customer { get; set; }
-        public Account Source { get; set; }
-        public int Destination { get; set; }
+        public TransactionType TransactionType { get; set; }
+        public string CustomerName { get;set; }
+        public SelectList AccountList { get; set; }
+        public int SourceAccountNumber { get; set; }
+        public int DestAccountNumber { get; set; }
+
         public decimal Amount { get; set; }
         public string Comment { get; set; }
-        public SelectList Accounts { get; set; }
-
-
-
     }
 }
