@@ -9,7 +9,7 @@ using S3500659_A2.Data;
 
 namespace S3500659_A2.Migrations
 {
-    [DbContext(typeof(A2Context))]
+    [DbContext(typeof(DBContext))]
     [Migration("20200717070312_InitialCreate")]
     partial class InitialCreate
     {

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace S3500659_A2.Data
 {
-    public class A2Context : DbContext
+    public class DBContext : DbContext
     {
-        public A2Context(DbContextOptions<A2Context> options) : base(options)  { }
+        public DBContext(DbContextOptions<DBContext> options) : base(options)  { }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

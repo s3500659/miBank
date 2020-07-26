@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vinh\\Desktop\\WDT A2\\S3500659_A2\\S3500659_A2.csproj": {}
+    "C:\\Users\\Vinh\\Desktop\\WDT A2\\a2-mibank-s3500659_a2\\S3500659_A2\\S3500659_A2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vinh\\Desktop\\WDT A2\\S3500659_A2\\S3500659_A2.csproj": {
+    "C:\\Users\\Vinh\\Desktop\\WDT A2\\a2-mibank-s3500659_a2\\S3500659_A2\\S3500659_A2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vinh\\Desktop\\WDT A2\\S3500659_A2\\S3500659_A2.csproj",
+        "projectUniqueName": "C:\\Users\\Vinh\\Desktop\\WDT A2\\a2-mibank-s3500659_a2\\S3500659_A2\\S3500659_A2.csproj",
         "projectName": "S3500659_A2",
-        "projectPath": "C:\\Users\\Vinh\\Desktop\\WDT A2\\S3500659_A2\\S3500659_A2.csproj",
+        "projectPath": "C:\\Users\\Vinh\\Desktop\\WDT A2\\a2-mibank-s3500659_a2\\S3500659_A2\\S3500659_A2.csproj",
         "packagesPath": "C:\\Users\\Vinh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vinh\\Desktop\\WDT A2\\S3500659_A2\\obj\\",
+        "outputPath": "C:\\Users\\Vinh\\Desktop\\WDT A2\\a2-mibank-s3500659_a2\\S3500659_A2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Vinh\\AppData\\Roaming\\NuGet\\NuGet.Config",

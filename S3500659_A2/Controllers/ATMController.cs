@@ -16,14 +16,14 @@ namespace S3500659_A2.Controllers
     [AuthorizeCustomer]
     public class ATMController : Controller
     {
-        private readonly A2Context _context;
+        private readonly DBContext _context;
 
 
         // retrieve the session variable
         private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
         private Account SourceAccount;
 
-        public ATMController(A2Context context)
+        public ATMController(DBContext context)
         {
             _context = context;
         }
