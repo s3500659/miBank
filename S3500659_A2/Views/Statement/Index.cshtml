@@ -1,0 +1,65 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+
+@model X.PagedList.IPagedList<Transaction>
+
+    <div class="col-12">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(x => x[0].TransactionID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x[0].TransactionType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x[0].AccountNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x[0].DestinationAccountNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x[0].Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x[0].Comment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(x => x[0].ModifyDate)
+                </th>
+            </tr>
+            @foreach (var t in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(x => t.TransactionID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => t.TransactionType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => t.AccountNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => t.DestinationAccountNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => t.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => t.Comment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => t.ModifyDate)
+                    </td>
+                </tr>
+            }
+        </table>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+            new PagedListRenderOptions
+                {
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" }
+            })
+    </div>

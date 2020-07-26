@@ -8,7 +8,7 @@ using S3500659_A2.Data;
 
 namespace S3500659_A2.Migrations
 {
-    [DbContext(typeof(A2Context))]
+    [DbContext(typeof(DBContext))]
     partial class A2ContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -33,8 +33,14 @@ namespace S3500659_A2.Migrations
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
+                    b.Property<int>("MaxFreeTransaction")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ModifyDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("TransactionCounter")
+                        .HasColumnType("int");
 
                     b.HasKey("AccountNumber");
 
