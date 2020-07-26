@@ -13,6 +13,7 @@
             <select asp-for="TransactionType" asp-items="Html.GetEnumSelectList<TransactionType>()" class="form-control">
                 <option value="">Choose a transaction type</option>
             </select>
+            <span asp-validation-for="TransactionType" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="SourceAccountNumber" class="control-label"></label>

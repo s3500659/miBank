@@ -12,9 +12,9 @@ namespace S3500659_A2.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly A2Context _context;
+        private readonly DBContext _context;
 
-        public LoginController(A2Context context) => _context = context;
+        public LoginController(DBContext context) => _context = context;
 
         public IActionResult Login() => View();
 

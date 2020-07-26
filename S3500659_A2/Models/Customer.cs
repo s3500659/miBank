@@ -25,7 +25,8 @@ namespace S3500659_A2.Models
         [StringLength(40)]
         public string City { get; set; }
 
-        [StringLength(3)] // TODO - Must be 3 lettered Australian state
+        [StringLength(3)]
+        [RegularExpression("^(NSW|VIC|ACT|QLD|WA|TAS|NT)$")]
         public string State { get; set; }
 
         [StringLength(4)] // TODO - Must be 4 digit number
