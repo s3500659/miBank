@@ -449,5 +449,3 @@ C:\Users\Vinh\Desktop\WDT A2\S3500659_A2\bin\Debug\netcoreapp3.1\X.PagedList.Web
 C:\Users\Vinh\Desktop\WDT A2\S3500659_A2\obj\Debug\netcoreapp3.1\S3500659_A2.csproj.CoreCompileInputs.cache
 C:\Users\Vinh\Desktop\WDT A2\S3500659_A2\obj\Debug\netcoreapp3.1\S3500659_A2.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Vinh\Desktop\WDT A2\S3500659_A2\obj\Debug\netcoreapp3.1\S3500659_A2.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Vinh\Desktop\WDT A2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Index.cshtml.g.cs
-C:\Users\Vinh\Desktop\WDT A2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Edit.cshtml.g.cs

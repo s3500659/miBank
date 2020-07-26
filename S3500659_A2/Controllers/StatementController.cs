@@ -14,10 +14,10 @@ namespace S3500659_A2.Controllers
 {
     public class StatementController : Controller
     {
-        private readonly DBContext _context;
+        private readonly A2Context _context;
         private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
 
-        public StatementController(DBContext context)
+        public StatementController(A2Context context)
         {
             _context = context;
         }

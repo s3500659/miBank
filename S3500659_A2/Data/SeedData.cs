@@ -12,7 +12,7 @@ namespace S3500659_A2.Data
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using var context = new DBContext(serviceProvider.GetRequiredService<DbContextOptions<DBContext>>());
+            using var context = new A2Context(serviceProvider.GetRequiredService<DbContextOptions<A2Context>>());
 
             if (context.Customers.Any())
                 return;

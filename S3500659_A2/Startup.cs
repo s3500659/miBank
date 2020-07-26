@@ -27,9 +27,9 @@ namespace S3500659_A2
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            services.AddDbContext<DBContext>(options =>
+            services.AddDbContext<A2Context>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString(nameof(DBContext)));
+                options.UseSqlServer(Configuration.GetConnectionString(nameof(A2Context)));
 
                 // Enable lazy loading.
                 options.UseLazyLoadingProxies();
