@@ -6,12 +6,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using S3500659_A2.Data;
+using S3500659_A2.Filters;
 using S3500659_A2.Models;
 using S3500659_A2.ViewModel;
+using SimpleHashing;
 using SQLitePCL;
 
 namespace S3500659_A2.Controllers
 {
+    [AuthorizeCustomer]
     public class ProfileController : Controller
     {
         private readonly DBContext _context;
@@ -20,6 +23,7 @@ namespace S3500659_A2.Controllers
         {
             _context = context;
         }
+
         public async Task<IActionResult> IndexAsync()
         {
             var customerID = HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
@@ -38,7 +42,7 @@ namespace S3500659_A2.Controllers
             return View(vm);
         }
 
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> EditDetails()
         {
             var customerID = HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
             var customer = await _context.Customers.FindAsync(customerID);
@@ -59,7 +63,7 @@ namespace S3500659_A2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit([Bind("CustomerName, TFN, Address, City, State, PostCode, Phone")] ProfileViewModel vm)
+        public async Task<IActionResult> EditDetails([Bind("CustomerName, TFN, Address, City, State, PostCode, Phone")] ProfileViewModel vm)
         {
             var customerID = HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
             var c = await _context.Customers.FindAsync(customerID);
@@ -89,22 +93,30 @@ namespace S3500659_A2.Controllers
 
             return View(model);
 
-
-
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> ChangePassword()
-        //{
-        //    var customerID = HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
-        //    var login = await _context.Logins.Where(x => x.CustomerID == customerID).FirstOrDefaultAsync();
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel vm)
+        {
+            var customerID = HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
+            var login = await _context.Logins.Where(x => x.CustomerID == customerID).FirstOrDefaultAsync();
 
-        //    var model = new ChangePasswordViewModel();
+            if(ModelState.IsValid)
+            {
+                if(PBKDF2.Verify(login.Password, vm.Password))
+                {
+                    if (vm.NewPassword.Equals(vm.ConfirmPassword))
+                    {
+                        var hashedPassword = PBKDF2.Hash(vm.ConfirmPassword);
+                        login.Password = hashedPassword;
+                        await _context.SaveChangesAsync();
 
-        //    return View(model);
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+            }
 
-
-
-        //}
+            return View(vm);
+        }
     }
 }
