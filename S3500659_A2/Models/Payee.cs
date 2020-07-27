@@ -18,6 +18,7 @@ namespace S3500659_A2.Models
         public string City { get; set; }
 
         [StringLength(3)]
+        [RegularExpression("^(NSW|VIC|ACT|QLD|WA|TAS|NT)$")]
         public string State { get; set; }
 
         [StringLength(4)]

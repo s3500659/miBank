@@ -7,19 +7,22 @@ using System.Threading.Tasks;
 
 namespace S3500659_A2.Models
 {
+    public enum Period
+    {
+        Minute,
+        Quarterly,
+        Annually,
+        OnceOff
+    }
+
     public class BillPay
     {
         [Required]
         public int BillPayID { get; set; }
 
-        //[Required, StringLength(4)]
-        //public int AccountNumber { get; set; }
-
         [Required]
         public virtual Account Account { get; set; }
 
-        //[Required, StringLength(4)]
-        //public int PayeeID { get; set; }
         [Required]
         public virtual Payee Payee { get; set; }
 
@@ -30,11 +33,14 @@ namespace S3500659_A2.Models
         [Required, StringLength(8)]
         public DateTime ScheduleDate { get; set; }
 
-        [Required, StringLength(1)]
-        public string Period { get; set; }
+        //[Required, StringLength(1)]
+        //public string Period { get; set; }
 
         [Required, StringLength(8)]
         public DateTime ModifyDate { get; set; }
+
+        [Required]
+        public Period Period { get; set; }
 
 
 

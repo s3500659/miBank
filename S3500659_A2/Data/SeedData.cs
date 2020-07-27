@@ -166,6 +166,38 @@ namespace S3500659_A2.Data
                     DestinationAccountNumber = null
                 });
 
+            context.Payees.AddRange(
+                new Payee
+                {
+                    PayeeName = "Vinh Tran",
+                    Address = "354 Real ST",
+                    City = "Sydney",
+                    State = "NSW",
+                    PostCode = "2000",
+                    Phone = "0408378880"
+
+                },
+                new Payee
+                {
+                    PayeeName = "Samantha Ho",
+                    Address = "254 Tuna ST",
+                    City = "Perth",
+                    State = "WA",
+                    PostCode = "6000",
+                    Phone = "0408378881"
+
+                },
+                new Payee
+                {
+                    PayeeName = "Phuong Tran",
+                    Address = "889 Apple ST",
+                    City = "Sydney",
+                    State = "NSW",
+                    PostCode = "2000",
+                    Phone = "0408378882"
+
+                });
+
 
             context.SaveChanges();
         }

@@ -9,7 +9,7 @@ using S3500659_A2.Data;
 namespace S3500659_A2.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class A2ContextModelSnapshot : ModelSnapshot
+    partial class DBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
