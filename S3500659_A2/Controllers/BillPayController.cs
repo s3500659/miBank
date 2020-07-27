@@ -38,5 +38,42 @@ namespace S3500659_A2.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateBillPay(BillPayViewModel vm)
+        {
+            var customerID = HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
+            var customer = await _context.Customers.FindAsync(customerID);
+
+            var period = Int32.Parse(vm.Period);
+
+
+
+
+            if (ModelState.IsValid)
+            {
+                var billPay = new BillPay
+                {
+                    Account = await _context.Accounts.FindAsync(vm.AccountNumber),
+                    Payee = await _context.Payees.FindAsync(vm.PayeeId),
+                    Amount = vm.Amount,
+                    ScheduleDate = vm.SecheduledDate,
+                    ModifyDate = DateTime.UtcNow,
+
+                    Period = period == 0 ? Period.Minute 
+                    : (period == 1 ? Period.Quarterly 
+                    : (period == 2 ? Period.Annually 
+                    : Period.OnceOff))
+
+                };
+
+                await _context.BillPays.AddAsync(billPay);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(vm);
+        }
+
     }
 }

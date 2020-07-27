@@ -23,7 +23,6 @@ namespace S3500659_A2.ViewModel
         [Required]
         public DateTime SecheduledDate { get; set; }
         [Required]
-        [RegularExpression("^(M|Q|Y|S)$")]
         public string Period { get; set; }
     }
 }
