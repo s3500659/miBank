@@ -20,7 +20,6 @@ namespace S3500659_A2.Models
     public class Account
     {
 
-
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int AccountNumber { get; set; }
 
@@ -33,6 +32,7 @@ namespace S3500659_A2.Models
         public virtual Customer Customer { get; set; }
 
         [Required]
+        [StringLength(8)]
         public DateTime ModifyDate { get; set; }
 
         public virtual List<Transaction> Transactions { get; set; }
@@ -42,6 +42,8 @@ namespace S3500659_A2.Models
         public decimal Balance { get; set; }
         public int TransactionCounter { get; set; }
         public int MaxFreeTransaction { get; set; }
+
+        public virtual List<BillPay> BillPays { get; set; }
 
         public Account()
         {
@@ -70,7 +72,7 @@ namespace S3500659_A2.Models
                 new Transaction
                 {
                     TransactionType = TransactionType.Withdraw,
-                    Amount = amount,
+                    Amount = -amount,
                     ModifyDate = DateTime.UtcNow,
                     Comment = comment
 
@@ -85,7 +87,7 @@ namespace S3500659_A2.Models
                 new Transaction
                 {
                     TransactionType = TransactionType.Withdraw,
-                    Amount = amount,
+                    Amount = -amount,
                     ModifyDate = DateTime.UtcNow,
                     Comment = comment
 
@@ -95,7 +97,7 @@ namespace S3500659_A2.Models
                 new Transaction
                 {
                     TransactionType = TransactionType.ServiceCharge,
-                    Amount = fee,
+                    Amount = -fee,
                     ModifyDate = DateTime.UtcNow,
                     Comment = "Withdraw Fee"
 

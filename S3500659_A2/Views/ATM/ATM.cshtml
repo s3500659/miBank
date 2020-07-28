@@ -1,11 +1,13 @@
-﻿@model S3500659_A2.ViewModel.NewATMViewModel
+﻿@model S3500659_A2.ViewModel.ATMViewModel
 @{
     ViewData["Title"] = "ATM";
 }
 
-<div>
-    <h1 class="display-4">Welcome, @Model.CustomerName</h1>
+<h1 class="display-4">Welcome, @Model.CustomerName</h1>
+<h5>New Transaction</h5>
+<hr />
 
+<div class="col-10">
     <form asp-action="ATM">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -13,18 +15,33 @@
             <select asp-for="TransactionType" asp-items="Html.GetEnumSelectList<TransactionType>()" class="form-control">
                 <option value="">Choose a transaction type</option>
             </select>
+            <span asp-validation-for="TransactionType" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="SourceAccountNumber" class="control-label"></label>
-            <select asp-for="SourceAccountNumber" asp-items="@Model.AccountList" class="form-control"></select>
+            <select asp-for="SourceAccountNumber" class="form-control">
+                <option value="">Select source account</option>
+                @foreach (var a in Model.Accounts)
+                {
+                    <option value="@a.AccountNumber">@a.AccountNumber (@a.AccountType) - Current Balance: $@a.Balance.ToString("0.00")</option>
+                }
+            </select>
+            <span asp-validation-for="SourceAccountNumber" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="DestAccountNumber" class="control-label"></label>
-            <select asp-for="DestAccountNumber" asp-items="@Model.AccountList" class="form-control"></select>
+            <select asp-for="DestAccountNumber" class="form-control">
+                <option value="">Select source account</option>
+                @foreach (var a in Model.Accounts)
+                {
+                    <option value="@a.AccountNumber">@a.AccountNumber (@a.AccountType) - Current Balance: $@a.Balance.ToString("0.00")</option>
+                }
+            </select>
+            <span asp-validation-for="DestAccountNumber" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Amount" class="control-label"></label>
-            <input asp-for="Amount" class="form-control" />
+            <input asp-for="Amount" class="form-control" value="Enter amount"/>
             <span asp-validation-for="Amount" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -36,8 +53,6 @@
             <input type="submit" value="Save" class="btn btn-primary" />
         </div>
     </form>
-
-
 </div>
 
 @section Scripts{

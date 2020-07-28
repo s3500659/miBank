@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using S3500659_A2.Data;
+using S3500659_A2.Filters;
 using S3500659_A2.Models;
 using X.PagedList;
 
 namespace S3500659_A2.Controllers
 {
+    [AuthorizeCustomer]
     public class StatementController : Controller
     {
         private readonly DBContext _context;

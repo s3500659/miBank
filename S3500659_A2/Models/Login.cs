@@ -18,9 +18,11 @@ namespace S3500659_A2.Models
         public virtual Customer Customer { get; set; }
 
         [Required]
+        [StringLength(20)]
         public string Password { get; set; }
 
         [Required]
+        [StringLength(8)]
         public DateTime ModifyDate { get; set; }
     }
 }

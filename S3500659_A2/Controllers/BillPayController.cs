@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using S3500659_A2.Data;
+using S3500659_A2.Filters;
 using S3500659_A2.Models;
 using S3500659_A2.ViewModel;
 using X.PagedList;
 
 namespace S3500659_A2.Controllers
 {
+    [AuthorizeCustomer]
     public class BillPayController : Controller
     {
         private readonly DBContext _context;
@@ -32,7 +34,7 @@ namespace S3500659_A2.Controllers
             var model = new BillPayViewModel()
             {
                 Customer = customer,
-                AccountList = new SelectList(customer.Accounts, "AccountNumber", "AccountNumber"),
+                Accounts = await _context.Accounts.Where(x => x.CustomerID == customer.CustomerID).ToListAsync(),
                 PayeeList = new SelectList(payees, "PayeeID", "PayeeName")
             };
 
@@ -51,7 +53,7 @@ namespace S3500659_A2.Controllers
                     Account = await _context.Accounts.FindAsync(vm.AccountNumber),
                     Payee = await _context.Payees.FindAsync(vm.PayeeId),
                     Amount = vm.Amount,
-                    ScheduleDate = vm.SecheduledDate,
+                    ScheduleDate = vm.ScheduledDate,
                     ModifyDate = DateTime.UtcNow,
                     Period = GetPeriod(vm.Period)
                 };
@@ -88,7 +90,7 @@ namespace S3500659_A2.Controllers
             var model = new BillPayViewModel()
             {
                 Customer = customer,
-                AccountList = new SelectList(customer.Accounts, "AccountNumber", "AccountNumber"),
+                Accounts = await _context.Accounts.Where(x => x.CustomerID == customer.CustomerID).ToListAsync(),
                 PayeeList = new SelectList(payees, "PayeeID", "PayeeName"),
                 EditId = id
             };
@@ -108,7 +110,7 @@ namespace S3500659_A2.Controllers
                 billPay.Account.AccountNumber = viewModel.AccountNumber;
                 billPay.Payee.PayeeID = viewModel.PayeeId;
                 billPay.Amount = viewModel.Amount;
-                billPay.ScheduleDate = viewModel.SecheduledDate;
+                billPay.ScheduleDate = viewModel.ScheduledDate;
                 billPay.Period = GetPeriod(viewModel.Period);
 
                 await _context.SaveChangesAsync();

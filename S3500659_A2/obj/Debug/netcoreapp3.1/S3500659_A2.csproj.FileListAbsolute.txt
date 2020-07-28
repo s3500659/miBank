@@ -879,7 +879,6 @@ C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcore
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\S3500659_A2.RazorCoreGenerate.cache
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\ATM\Index.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs

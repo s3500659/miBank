@@ -33,9 +33,6 @@ namespace S3500659_A2.Models
         [Required, StringLength(8)]
         public DateTime ScheduleDate { get; set; }
 
-        //[Required, StringLength(1)]
-        //public string Period { get; set; }
-
         [Required, StringLength(8)]
         public DateTime ModifyDate { get; set; }
 

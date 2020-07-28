@@ -10,7 +10,7 @@ using S3500659_A2.Data;
 namespace S3500659_A2.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20200728000449_InitialCreate")]
+    [Migration("20200728040936_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -235,7 +235,7 @@ namespace S3500659_A2.Migrations
             modelBuilder.Entity("S3500659_A2.Models.BillPay", b =>
                 {
                     b.HasOne("S3500659_A2.Models.Account", "Account")
-                        .WithMany()
+                        .WithMany("BillPays")
                         .HasForeignKey("AccountNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

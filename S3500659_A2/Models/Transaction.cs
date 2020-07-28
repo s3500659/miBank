@@ -16,6 +16,7 @@ namespace S3500659_A2.Models
         BillPay = 5
     }
 
+
     public class Transaction
     {
         public int TransactionID { get; set; }
@@ -41,6 +42,7 @@ namespace S3500659_A2.Models
         public string Comment { get; set; }
 
         [Required]
+        [StringLength(8)]
         public DateTime ModifyDate { get; set; }
 
 

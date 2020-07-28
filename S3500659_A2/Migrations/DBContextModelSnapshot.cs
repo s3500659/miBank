@@ -233,7 +233,7 @@ namespace S3500659_A2.Migrations
             modelBuilder.Entity("S3500659_A2.Models.BillPay", b =>
                 {
                     b.HasOne("S3500659_A2.Models.Account", "Account")
-                        .WithMany()
+                        .WithMany("BillPays")
                         .HasForeignKey("AccountNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

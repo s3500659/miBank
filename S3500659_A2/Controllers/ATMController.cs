@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using NwbaExample.Utilities;
 using S3500659_A2.Data;
 using S3500659_A2.Filters;
@@ -36,27 +37,27 @@ namespace S3500659_A2.Controllers
         {
             var customer = await _context.Customers.FindAsync(CustomerID);
 
-            var viewModel = new NewATMViewModel
+            var viewModel = new ATMViewModel
             {
                 CustomerName = customer.CustomerName,
-                AccountList = new SelectList(customer.Accounts, "AccountNumber", "AccountNumber")
-
-
+                Accounts = await _context.Accounts.Where(x => x.CustomerID == customer.CustomerID).ToListAsync()
             };
 
             return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ATM(NewATMViewModel viewModel)
+        public async Task<IActionResult> ATM(ATMViewModel viewModel)
         {
-            var customer = await _context.Customers.FindAsync(CustomerID);
-            var selectList = new SelectList(customer.Accounts, "AccountNumber", "AccountNumber");
 
+            var customer = await _context.Customers.FindAsync(CustomerID);
             var sourceAccount = await _context.Accounts.FindAsync(viewModel.SourceAccountNumber);
             var destinationAccount = await _context.Accounts.FindAsync(viewModel.DestAccountNumber);
             var amount = viewModel.Amount;
             var comment = viewModel.Comment;
+
+            viewModel.CustomerName = customer.CustomerName;
+            viewModel.Accounts = await _context.Accounts.Where(x => x.CustomerID == customer.CustomerID).ToListAsync();
 
             if (viewModel.Amount <= 0)
                 ModelState.AddModelError(nameof(viewModel.Amount), "Amount must be positive.");
@@ -65,35 +66,27 @@ namespace S3500659_A2.Controllers
 
             if (!ModelState.IsValid)
             {
-                viewModel.AccountList = selectList;
                 return View(viewModel);
             }
 
-
+            // Deposit
             if (viewModel.TransactionType == TransactionType.Deposit)
             {
-                
-
                 sourceAccount.Deposit(viewModel.Amount, viewModel.Comment);
-
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
+            // Withdraw
             else if (viewModel.TransactionType == TransactionType.Withdraw)
             {
-
                 if (sourceAccount.TransactionCounter < sourceAccount.MaxFreeTransaction)
                 {
                     if (sourceAccount.Balance < viewModel.Amount)
                     {
                         ModelState.AddModelError(nameof(viewModel.Amount), "You don't have enough money to make this withdraw");
 
-                        if (!ModelState.IsValid)
-                        {
-                            viewModel.AccountList = selectList;
-                            return View(viewModel);
-                        }
+                        return View(viewModel);
                     }
                     sourceAccount.Withdraw(viewModel.Amount, viewModel.Comment);
                 }
@@ -101,35 +94,30 @@ namespace S3500659_A2.Controllers
                 {
                     if (sourceAccount.Balance < (viewModel.Amount + ServiceCharge.WithdrawFee))
                     {
-                        ModelState.AddModelError(nameof(viewModel.Amount), $"Your balance is less than requested withdraw amount + withdraw fee {ServiceCharge.WithdrawFee}");
+                        ModelState.AddModelError(nameof(viewModel.Amount), $"Your balance is less than requested withdraw amount + withdraw fee ({ServiceCharge.WithdrawFee})");
 
-                        if (!ModelState.IsValid)
-                        {
-                            viewModel.AccountList = selectList;
-                            return View(viewModel);
-                        }
+                        return View(viewModel);
                     }
                     else
                     {
                         sourceAccount.Withdraw(viewModel.Amount, viewModel.Comment, ServiceCharge.WithdrawFee);
                     }
                 }
-
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
+            // Transfer
             else if (viewModel.TransactionType == TransactionType.Transfer)
             {
                 if (sourceAccount.TransactionCounter < sourceAccount.MaxFreeTransaction)
                 {
-                    if(sourceAccount.Balance < amount)
+                    if (sourceAccount.Balance < amount)
                     {
                         ModelState.AddModelError(nameof(viewModel.Amount), "You don't have enough funds to make this transfer");
 
                         if (!ModelState.IsValid)
                         {
-                            viewModel.AccountList = selectList;
                             return View(viewModel);
                         }
 
@@ -139,13 +127,12 @@ namespace S3500659_A2.Controllers
                     }
                 }
 
-                if(sourceAccount.Balance < (amount + ServiceCharge.TransferFee))
+                if (sourceAccount.Balance < (amount + ServiceCharge.TransferFee))
                 {
-                    ModelState.AddModelError(nameof(viewModel.Amount), $"Your balance is less than requested transfer amount + withdraw fee {ServiceCharge.TransferFee}");
+                    ModelState.AddModelError(nameof(viewModel.Amount), $"Your balance is less than requested transfer amount + withdraw fee ({ServiceCharge.TransferFee})");
 
                     if (!ModelState.IsValid)
                     {
-                        viewModel.AccountList = selectList;
                         return View(viewModel);
                     }
                 }
@@ -153,11 +140,7 @@ namespace S3500659_A2.Controllers
                 sourceAccount.Transfer(destinationAccount, amount, comment, ServiceCharge.TransferFee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-
             }
-           
-            
-
 
             return View(viewModel);
         }
