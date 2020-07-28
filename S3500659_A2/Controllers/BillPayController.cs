@@ -53,11 +53,7 @@ namespace S3500659_A2.Controllers
                     Amount = vm.Amount,
                     ScheduleDate = vm.SecheduledDate,
                     ModifyDate = DateTime.UtcNow,
-
-                    Period = period == 0 ? Period.Minute 
-                    : (period == 1 ? Period.Quarterly 
-                    : (period == 2 ? Period.Annually 
-                    : Period.OnceOff))
+                    Period = GetPeriod(vm.Period)
                 };
                 await _context.BillPays.AddAsync(billPay);
                 await _context.SaveChangesAsync();
@@ -113,16 +109,23 @@ namespace S3500659_A2.Controllers
                 billPay.Payee.PayeeID = viewModel.PayeeId;
                 billPay.Amount = viewModel.Amount;
                 billPay.ScheduleDate = viewModel.SecheduledDate;
-                billPay.Period = period == 0 ? Period.Minute
-                    : (period == 1 ? Period.Quarterly
-                    : (period == 2 ? Period.Annually
-                    : Period.OnceOff));
+                billPay.Period = GetPeriod(viewModel.Period);
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(ScheduledBillPay));
             }
 
             return View(viewModel);
+        }
+
+        private Period GetPeriod(string period)
+        {
+            var intPeriod = Int32.Parse(period);
+
+            return intPeriod == 0 ? Period.Minute
+                    : (intPeriod == 1 ? Period.Quarterly
+                    : (intPeriod == 2 ? Period.Annually
+                    : Period.OnceOff));
         }
 
     }

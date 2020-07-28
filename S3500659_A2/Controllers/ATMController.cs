@@ -18,10 +18,7 @@ namespace S3500659_A2.Controllers
     {
         private readonly DBContext _context;
 
-
-        // retrieve the session variable
         private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
-        private Account SourceAccount;
 
         public ATMController(DBContext context)
         {
@@ -35,134 +32,7 @@ namespace S3500659_A2.Controllers
         }
 
 
-        //public async Task<IActionResult> Deposit(int id) => View(await _context.Accounts.FindAsync(id));
-        public async Task<IActionResult> Deposit(int id)
-        {
-            var account = await _context.Accounts.FindAsync(id);
-            return View(account);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Deposit(int id, decimal amount, string comment)
-        {
-            var account = await _context.Accounts.FindAsync(id);
-
-            if (amount <= 0)
-                ModelState.AddModelError(nameof(amount), "Amount must be positive.");
-            if (amount.HasMoreThanTwoDecimalPlaces())
-                ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Amount = amount;
-                return View(account);
-            }
-
-            account.Deposit(amount, comment);
-
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Withdraw(int id)
-        {
-            var account = await _context.Accounts.FindAsync(id);
-            return View(account);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Withdraw(int id, decimal amount, string comment)
-        {
-            var account = await _context.Accounts.FindAsync(id);
-
-            if (amount <= 0)
-                ModelState.AddModelError(nameof(amount), "Amount must be positive.");
-            if (amount.HasMoreThanTwoDecimalPlaces())
-                ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Amount = amount;
-                return View(account);
-            }
-
-            if (account.TransactionCounter < account.MaxFreeTransaction)
-            {
-                if (account.Balance < amount)
-                {
-                    ModelState.AddModelError(nameof(amount), "You don't have enough money to make this withdraw");
-
-                    if (!ModelState.IsValid)
-                    {
-                        ViewBag.Amount = amount;
-                        return View(account);
-                    }
-                }
-                account.Withdraw(amount, comment);
-            }
-            else
-            {
-                if (account.Balance < (amount + ServiceCharge.WithdrawFee))
-                {
-                    ModelState.AddModelError(nameof(amount), $"Your balance is less than requested withdraw amount + withdraw fee {ServiceCharge.WithdrawFee}");
-
-                    if (!ModelState.IsValid)
-                    {
-                        ViewBag.Amount = amount;
-                        return View(account);
-                    }
-                }
-                else
-                {
-                    account.Withdraw(amount, comment, ServiceCharge.WithdrawFee);
-                }
-            }
-
-
-
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
-        }
-
-
-        public async Task<IActionResult> Transfer(int id)
-        {
-            //var customer = await _context.Customers.FindAsync(CustomerID);
-            //ViewBag.SourceAccount = id;
-
-            //ViewData["AccountID"] = new SelectList(
-            //    _context.Accounts
-            //    .Where(t => t.CustomerID == HttpContext.Session.GetInt32("CustomerID"))
-            //    .OrderBy(t => t.ModifyDate),
-            //    "AccountID",
-            //    "AccountID"
-            //    );
-
-            var customer = await _context.Customers.FindAsync(CustomerID);
-            SourceAccount = await _context.Accounts.FindAsync(id);
-
-
-            var model = new TransferViewModel
-            {
-                Customer = customer,
-                Source = await _context.Accounts.FindAsync(id),
-                Accounts = new SelectList(customer.Accounts, "AccountNumber", "AccountNumber")
-
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Transfer(TransferViewModel viewModel)
-        {
-            Console.WriteLine(SourceAccount.ToString());
-
-            return View(viewModel);
-        }
-
-        public async Task<IActionResult> NewATM()
+        public async Task<IActionResult> ATM()
         {
             var customer = await _context.Customers.FindAsync(CustomerID);
 
@@ -178,7 +48,7 @@ namespace S3500659_A2.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> NewATM(NewATMViewModel viewModel)
+        public async Task<IActionResult> ATM(NewATMViewModel viewModel)
         {
             var customer = await _context.Customers.FindAsync(CustomerID);
             var selectList = new SelectList(customer.Accounts, "AccountNumber", "AccountNumber");

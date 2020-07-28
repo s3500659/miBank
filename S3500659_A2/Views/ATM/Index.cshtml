@@ -21,7 +21,8 @@
                 <td>@Html.DisplayFor(x => account.AccountType)</td>
                 <td>@Html.DisplayFor(x => account.Balance)</td>
                 <td>
-                    <a asp-controller="Statement" asp-action="Index" asp-route-id="@account.AccountNumber" class="btn btn-primary">View Statement</a>
+                    <a asp-controller="Statement" asp-action="Index" asp-route-id="@account.AccountNumber" 
+                       class="btn btn-primary">View Statement</a>
                 </td>
             </tr>
         }

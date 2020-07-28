@@ -45,7 +45,7 @@ namespace S3500659_A2.Controllers
             /*
              * send sessions variable to the customer controller, index method
              */
-            return RedirectToAction("NewATM", "ATM");
+            return RedirectToAction("ATM", "ATM");
         }
 
         [Route("LogoutNow")]

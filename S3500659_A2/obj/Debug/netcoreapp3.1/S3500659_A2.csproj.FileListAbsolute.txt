@@ -877,11 +877,7 @@ C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcore
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\S3500659_A2.TagHelpers.input.cache
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\S3500659_A2.TagHelpers.output.cache
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\S3500659_A2.RazorCoreGenerate.cache
-C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\ATM\Deposit.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\ATM\Index.cshtml.g.cs
-C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\ATM\NewATM.cshtml.g.cs
-C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\ATM\Transfer.cshtml.g.cs
-C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\ATM\Withdraw.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
@@ -906,3 +902,4 @@ C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcore
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\BillPay\Index.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\BillPay\ScheduledBillPay.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\BillPay\ModifyBillPay.cshtml.g.cs
+C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\ATM\ATM.cshtml.g.cs
