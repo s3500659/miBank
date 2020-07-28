@@ -24,5 +24,6 @@ namespace S3500659_A2.ViewModel
         public DateTime SecheduledDate { get; set; }
         [Required]
         public string Period { get; set; }
+        public int? EditId { get; set; }
     }
 }

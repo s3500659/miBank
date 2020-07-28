@@ -1,0 +1,28 @@
+﻿@model S3500659_A2.ViewModel.ScheduledPaymentViewModel
+
+<h1>Welcome @Model.Customer.CustomerName</h1>
+<h3>Scheduled Payment</h3>
+
+<div class="col-10">
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(x => x.BillPay.Payee.PayeeName)</th>
+            <th>@Html.DisplayNameFor(x => x.BillPay.Amount)</th>
+            <th>@Html.DisplayNameFor(x => x.BillPay.ScheduleDate)</th>
+            <th>@Html.DisplayNameFor(x => x.BillPay.Period)</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var b in Model.BillPays)
+        {
+            <tr>
+                <td>@b.Payee.PayeeName</td>
+                <td>@b.Amount</td>
+                <td>@b.ScheduleDate</td>
+                <td>@b.Period</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="ModifyBillPay" asp-route-id="@b.BillPayID">Modify</a>
+                </td>  
+            </tr>
+        }
+    </table>
+</div>

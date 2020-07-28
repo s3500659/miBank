@@ -96,8 +96,8 @@ namespace S3500659_A2.Migrations
                     PayeeID = table.Column<int>(nullable: false),
                     Amount = table.Column<decimal>(type: "money", maxLength: 8, nullable: false),
                     ScheduleDate = table.Column<DateTime>(maxLength: 8, nullable: false),
-                    Period = table.Column<string>(maxLength: 1, nullable: false),
-                    ModifyDate = table.Column<DateTime>(maxLength: 8, nullable: false)
+                    ModifyDate = table.Column<DateTime>(maxLength: 8, nullable: false),
+                    Period = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

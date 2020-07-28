@@ -1,16 +1,17 @@
 ﻿@model S3500659_A2.ViewModel.BillPayViewModel
 
 @{
-    ViewData["Title"] = "Bill Pay";
+    ViewData["Title"] = "Edit Bill Pay";
 }
 
 <h1>Welcome @Model.Customer.CustomerName</h1>
-<h5>Create new scheduled payment</h5>
+<h5>Modify scheduled payment</h5>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateBillPay">
+        <form asp-action="ModifyBillPay">
+            <input type="hidden" asp-for="EditId" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="AccountNumber" class="control-label"></label>

@@ -904,3 +904,5 @@ C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcore
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\Profile\ChangePassword.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\Profile\EditDetails.cshtml.g.cs
 C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\BillPay\Index.cshtml.g.cs
+C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\BillPay\ScheduledBillPay.cshtml.g.cs
+C:\Users\Vinh\Desktop\WDT A2\a2-mibank-s3500659_a2\S3500659_A2\obj\Debug\netcoreapp3.1\Razor\Views\BillPay\ModifyBillPay.cshtml.g.cs

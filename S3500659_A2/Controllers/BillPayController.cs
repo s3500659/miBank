@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using S3500659_A2.Data;
 using S3500659_A2.Models;
 using S3500659_A2.ViewModel;
+using X.PagedList;
 
 namespace S3500659_A2.Controllers
 {
@@ -41,14 +42,8 @@ namespace S3500659_A2.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBillPay(BillPayViewModel vm)
         {
-            var customerID = HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
-            var customer = await _context.Customers.FindAsync(customerID);
 
             var period = Int32.Parse(vm.Period);
-
-
-
-
             if (ModelState.IsValid)
             {
                 var billPay = new BillPay
@@ -63,16 +58,71 @@ namespace S3500659_A2.Controllers
                     : (period == 1 ? Period.Quarterly 
                     : (period == 2 ? Period.Annually 
                     : Period.OnceOff))
-
                 };
-
                 await _context.BillPays.AddAsync(billPay);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ScheduledBillPay));
             }
 
             return View(vm);
+        }
+
+        public async Task<IActionResult> ScheduledBillPay()
+        {
+            var customerID = HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
+            var customer = await _context.Customers.FindAsync(customerID);
+
+            var viewModel = new ScheduledPaymentViewModel()
+            {
+                Customer = customer,
+                BillPays = await _context.BillPays.ToListAsync()
+            };
+
+            return View(viewModel);
+
+        }
+
+        public async Task<IActionResult> ModifyBillPay(int id)
+        {
+            var customerID = HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value;
+            var customer = await _context.Customers.FindAsync(customerID);
+            var payees = await _context.Payees.ToListAsync();
+
+            var model = new BillPayViewModel()
+            {
+                Customer = customer,
+                AccountList = new SelectList(customer.Accounts, "AccountNumber", "AccountNumber"),
+                PayeeList = new SelectList(payees, "PayeeID", "PayeeName"),
+                EditId = id
+            };
+
+            return View(model);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ModifyBillPay(BillPayViewModel viewModel)
+        {
+            var billPay = await _context.BillPays.FindAsync(viewModel.EditId);
+
+            var period = Int32.Parse(viewModel.Period);
+            if (ModelState.IsValid)
+            {
+                billPay.Account.AccountNumber = viewModel.AccountNumber;
+                billPay.Payee.PayeeID = viewModel.PayeeId;
+                billPay.Amount = viewModel.Amount;
+                billPay.ScheduleDate = viewModel.SecheduledDate;
+                billPay.Period = period == 0 ? Period.Minute
+                    : (period == 1 ? Period.Quarterly
+                    : (period == 2 ? Period.Annually
+                    : Period.OnceOff));
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(ScheduledBillPay));
+            }
+
+            return View(viewModel);
         }
 
     }

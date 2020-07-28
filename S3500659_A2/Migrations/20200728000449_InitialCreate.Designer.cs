@@ -10,7 +10,7 @@ using S3500659_A2.Data;
 namespace S3500659_A2.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20200727045740_InitialCreate")]
+    [Migration("20200728000449_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,10 +72,8 @@ namespace S3500659_A2.Migrations
                     b.Property<int>("PayeeID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Period")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1)")
-                        .HasMaxLength(1);
+                    b.Property<int>("Period")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ScheduleDate")
                         .HasColumnType("datetime2")
