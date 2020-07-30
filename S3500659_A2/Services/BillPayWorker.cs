@@ -40,7 +40,7 @@ namespace S3500659_A2.Services
                     {
                         if (b.Account.Balance >= b.Amount)
                         {
-                            if (b.ScheduleDate <= DateTime.UtcNow)
+                            if (b.ScheduleDate <= DateTime.Now)
                             {
                                 if (b.Period == Period.Minute)
                                 {
@@ -50,7 +50,7 @@ namespace S3500659_A2.Services
                                 else if (b.Period == Period.Quarterly)
                                 {
                                     b.Account.BillPay(b.Amount, "Bill Pay (Period: Quarterly)");
-                                    b.ScheduleDate += TimeSpan.FromDays(91.25);
+                                    b.ScheduleDate += TimeSpan.FromDays(92);
                                 }
                                 else if (b.Period == Period.Annually)
                                 {
@@ -68,7 +68,7 @@ namespace S3500659_A2.Services
 
                     }
 
-                    await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
+                    await Task.Delay(TimeSpan.FromSeconds(60), stoppingToken);
                 }
             }
 

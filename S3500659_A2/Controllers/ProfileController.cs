@@ -113,6 +113,8 @@ namespace S3500659_A2.Controllers
 
                         return RedirectToAction(nameof(Index));
                     }
+
+                    ModelState.AddModelError(nameof(vm.ConfirmPassword), "New password and confirm password doesn't match");
                 }
             }
 

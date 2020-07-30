@@ -10,9 +10,9 @@ namespace S3500659_A2.ViewModel
     {
         [Required]
         public string Password { get; set; }
-        [Required]
+        [Required, Display(Name = "New Password")]
         public string NewPassword { get; set; }
-        [Required]
+        [Required, Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
     }
 }
