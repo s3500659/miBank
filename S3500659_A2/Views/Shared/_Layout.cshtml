@@ -31,6 +31,9 @@
                                 </span>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Profile" asp-action="Index">My Profile</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Login" asp-action="Logout">Logout</a>
                             </li>
                         }
@@ -48,11 +51,8 @@
                                 <a class="nav-link text-dark" asp-controller="ATM" asp-action="ATM">ATM</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="ATM" asp-action="Index">Statements</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Profile" asp-action="Index">My Details</a>
-                            </li>
+                                <a class="nav-link text-dark" asp-controller="ATM" asp-action="Index">Accounts/Statements</a>
+                            </li>                          
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="BillPay" asp-action="Index">Bill Pay</a>
                             </li>
@@ -73,7 +73,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - NwbaExample - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - VDTBank 
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
