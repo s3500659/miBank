@@ -62,7 +62,7 @@ namespace S3500659_A2.Models
                 {
                     TransactionType = TransactionType.Deposit,
                     Amount = amount,
-                    ModifyDate = DateTime.Now,
+                    ModifyDate = DateTime.UtcNow,
                     Comment = comment
 
                 });
@@ -75,7 +75,7 @@ namespace S3500659_A2.Models
                 {
                     TransactionType = TransactionType.BillPay,
                     Amount = -amount,
-                    ModifyDate = DateTime.Now,
+                    ModifyDate = DateTime.UtcNow,
                     Comment = comment
 
                 });
@@ -90,7 +90,7 @@ namespace S3500659_A2.Models
                 {
                     TransactionType = TransactionType.Withdraw,
                     Amount = -amount,
-                    ModifyDate = DateTime.Now,
+                    ModifyDate = DateTime.UtcNow,
                     Comment = comment
 
                 });
@@ -105,7 +105,7 @@ namespace S3500659_A2.Models
                 {
                     TransactionType = TransactionType.Withdraw,
                     Amount = -amount,
-                    ModifyDate = DateTime.Now,
+                    ModifyDate = DateTime.UtcNow,
                     Comment = comment
 
                 });
@@ -115,7 +115,7 @@ namespace S3500659_A2.Models
                 {
                     TransactionType = TransactionType.ServiceCharge,
                     Amount = -fee,
-                    ModifyDate = DateTime.Now,
+                    ModifyDate = DateTime.UtcNow,
                     Comment = "Withdraw Fee"
 
                 });
@@ -136,7 +136,7 @@ namespace S3500659_A2.Models
                     TransactionType = TransactionType.Transfer,
                     Amount = -amount,
                     DestinationAccountNumber = destination.AccountNumber,
-                    ModifyDate = DateTime.Now,
+                    ModifyDate = DateTime.UtcNow,
                     Comment = comment
                 });
 
@@ -145,7 +145,7 @@ namespace S3500659_A2.Models
                 {
                     TransactionType = TransactionType.Transfer,
                     Amount = amount,
-                    ModifyDate = DateTime.Now,
+                    ModifyDate = DateTime.UtcNow,
                     Comment = comment
                 });
 
