@@ -64,6 +64,20 @@ namespace S3500659_A2.Models
 
                 });
         }
+        public void BillPay(decimal amount, string comment)
+        {
+            Balance -= amount;
+            Transactions.Add(
+                new Transaction
+                {
+                    TransactionType = TransactionType.BillPay,
+                    Amount = -amount,
+                    ModifyDate = DateTime.UtcNow,
+                    Comment = comment
+
+                });
+            TransactionCounter++;
+        }
 
         public void Withdraw(decimal amount, string comment)
         {

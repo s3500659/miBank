@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using S3500659_A2.Data;
+using S3500659_A2.Services;
 
 namespace S3500659_A2
 {
@@ -26,6 +27,7 @@ namespace S3500659_A2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddHostedService<BillPayWorker>();
 
             services.AddDbContext<DBContext>(options =>
             {

@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using S3500659_A2.Data;
+using S3500659_A2.Services;
 
 namespace S3500659_A2
 {
@@ -42,5 +43,6 @@ namespace S3500659_A2
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }
