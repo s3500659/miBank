@@ -21,12 +21,15 @@ namespace S3500659_A2.Models
     {
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Display(Name = "Account Number")]
         public int AccountNumber { get; set; }
 
         [Required]
+        [Display(Name = "Account Type")]
         public AccountType AccountType { get; set; }
 
         [Required]
+        [Display(Name = "Customer ID")]
         public int CustomerID { get; set; }
 
         public virtual Customer Customer { get; set; }

@@ -9,6 +9,7 @@ namespace S3500659_A2.Models
         public int PayeeID { get; set; }
 
         [Required, StringLength(50)]
+        [Display(Name = "Payee Name")]
         public string PayeeName { get; set; }
 
         [StringLength(50)]

@@ -31,6 +31,7 @@ namespace S3500659_A2.Models
         public decimal Amount { get; set; }
 
         [Required, StringLength(8)]
+        [Display(Name = "Schedule Date")]
         public DateTime ScheduleDate { get; set; }
 
         [Required, StringLength(8)]

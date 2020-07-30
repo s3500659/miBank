@@ -1,7 +1,7 @@
 ﻿@model S3500659_A2.ViewModel.ScheduledPaymentViewModel
 
 <h1>Welcome @Model.Customer.CustomerName</h1>
-<h3>Scheduled Payment</h3>
+<h5>Scheduled Payment</h5>
 
 <div class="col-10">
     <table class="table">
@@ -16,14 +16,14 @@
         {
             <tr>
                 <td>@b.Payee.PayeeName</td>
-                <td>@b.Amount</td>
+                <td>$@b.Amount.ToString("0.00")</td>
                 <td>@b.ScheduleDate</td>
                 <td>@b.Period</td>
                 <td>
                     <a class="btn btn-primary" asp-action="ModifyBillPay" asp-route-id="@b.BillPayID">Modify</a>
-                </td>  
+                </td>
             </tr>
         }
     </table>
-
+    <a class="btn btn-primary" asp-action="Index">Add new bill pay</a>
 </div>

@@ -46,26 +46,23 @@ namespace S3500659_A2.Services
                                 {
                                     b.Account.BillPay(b.Amount, "Bill Pay (Period: Minute)");
                                     b.ScheduleDate += TimeSpan.FromMinutes(1);
-                                    await context.SaveChangesAsync();
                                 }
                                 else if (b.Period == Period.Quarterly)
                                 {
                                     b.Account.BillPay(b.Amount, "Bill Pay (Period: Quarterly)");
                                     b.ScheduleDate += TimeSpan.FromDays(91.25);
-                                    await context.SaveChangesAsync();
                                 }
                                 else if (b.Period == Period.Annually)
                                 {
                                     b.Account.BillPay(b.Amount, "Bill Pay (Period: Yearly)");
                                     b.ScheduleDate += TimeSpan.FromDays(365);
-                                    await context.SaveChangesAsync();
                                 }
                                 else
                                 {
                                     b.Account.BillPay(b.Amount, "Bill Pay (Period: Once off)");
                                     context.BillPays.Remove(b);
-                                    await context.SaveChangesAsync();
                                 }
+                                await context.SaveChangesAsync();
                             }
                         }
 
